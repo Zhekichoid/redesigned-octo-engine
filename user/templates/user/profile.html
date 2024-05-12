@@ -2,8 +2,8 @@
 {% block title %}Profile Page{% endblock %}
 
 {% block content %}
-<div class="row my-4">
-    <div class="col-md-4"></div>
+<div class="row my-4 ">
+    <div class="col-md-2"></div>
     <div class="col-md-8">
         <div class="card">
             <div class="card-header bg-primary text-white">
@@ -13,8 +13,10 @@
                 <div class="col-md-8">
                     <table class="table table-borderless position-relative">
                         <thead>
-                            <span class="h4">Profile Information</span class="h4">
-                            <a href="{% url 'user-profile-update' %}" class='btn btn-success'>Edit</a>
+                            <div class = "px-1 d-flex justify-content-between">
+                                <span class="h4">Profile Information</span class="h4">
+                                <a href="{% url 'user-profile-update' %}" class='btn btn-success'>Edit</a>
+                            </div>
                             <hr>
                         </thead>
                         <tbody>

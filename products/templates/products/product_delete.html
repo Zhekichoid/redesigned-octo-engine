@@ -1,0 +1,23 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+<div class="row my-4">
+    <div class="col-md-6 offset-md-3">
+        <div class="border p-3 bg-white">
+            <h3>Delete Item</h3>
+            <hr>
+            <form method="POST">
+                <div class="alert alert-danger">
+                    <h4>Are you sure, you want to delete {{ item }}?</h4>
+                </div>
+                {% csrf_token %}
+                {{ form }}
+                <div class="d-flex justify-content-between">
+                <a class="btn btn-secondary " href="{% url 'products-products' %}">Cancel</a>
+                <input class="btn btn-danger " type="submit" value="Confirm">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
