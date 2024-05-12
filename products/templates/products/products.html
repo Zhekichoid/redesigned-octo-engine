@@ -1,1 +1,33 @@
 {% extends "partials/base.html" %}
+
+{% block content %}
+<div class="row my-4 ">
+    <a href="{% url 'products-create' %}" class='btn btn-success'>New Product</a>
+    <div class="col-md-8">
+        <table class="table bg-white">
+            <thead class="bg-info text-white">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.amount }}</td>
+                    <td>
+                        <a href="{% url 'products-update' item.product_id %}" class='btn btn-info text-white'>Edit</a>
+                        <a href="{% url 'products-delete' item.product_id %}" class='btn btn-danger text-white'>Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
