@@ -22,8 +22,8 @@
                     <td>{{ item.amount }}</td>
                     <td>
                         <div class='d-flex justify-content-end'>
-                            <a href="{% url 'products-update' item.product_id %}" class='btn btn-info text-white mx-2'>Edit</a>
-                            <a href="{% url 'products-delete' item.product_id %}" class='btn btn-danger text-white'>Delete</a>
+                            <a href="{% url 'products-update' item.id %}" class='btn btn-info text-white mx-2'>Edit</a>
+                            <a href="{% url 'products-delete' item.id %}" class='btn btn-danger text-white'>Delete</a>
                         </div>
                     </td>
                 </tr>

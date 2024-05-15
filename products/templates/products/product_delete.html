@@ -8,7 +8,7 @@
             <hr>
             <form method="POST">
                 <div class="alert alert-danger">
-                    <h4>Are you sure, you want to delete {{ item }}?</h4>
+                    <h4>Are you sure, you want to delete {{ item.name }}?</h4>
                 </div>
                 {% csrf_token %}
                 {{ form }}

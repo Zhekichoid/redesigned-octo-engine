@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Products, Departments, ProductDepartment
-from .forms import ProductForm, DepartmentsForm
+from .forms import ProductForm, DepartmentsForm, OrderForm
 from django.contrib.auth.models import User
 
 
@@ -38,7 +38,23 @@ def staff_detail(request, pk):
 
 @login_required
 def orders(request):
-        return render(request,'products/orders.html')
+        return render(request,'orders/orders.html')
+
+
+
+def order_create(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('orders')
+    else:
+        form = OrderForm()
+
+    context = {
+        'form': form
+    }
+    return render(request,'orders/orders_create.html', context)
 
 
 @login_required
@@ -68,17 +84,20 @@ def product_create(request):
 
 @login_required
 def product_delete(request, pk):
-    item = Products.objects.get(product_id=pk)
+    item = Products.objects.get(id=pk)
+    context = {
+        'item' : item   
+        }
     if request.method=='POST':
         item.delete()
         return redirect('products-products')
-    return render(request, 'products/product_delete.html')
+    return render(request, 'products/product_delete.html', context)
 
 
 @login_required
 def product_update(request, pk):
     
-    item = Products.objects.get(product_id=pk)
+    item = Products.objects.get(id=pk)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=item)
         if form.is_valid():
@@ -125,7 +144,7 @@ def department_create(request):
 
 @login_required
 def department_detail(request, pk):
-    department = Departments.objects.get(deparment_id=pk)
+    department = Departments.objects.get(id=pk)
     items = department.productdepartment_set.select_related('product')
 
     context = {
