@@ -1,0 +1,57 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+<div class="row my-4 ">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Profile
+            </div>
+            <div class="row p-3">
+                <div class="col-md-8">
+                    <table class="table table-borderless position-relative">
+                        <thead>
+                            <div class = "px-1 d-flex justify-content-between">
+                                <span class="h4">Profile Information</span class="h4">
+                                <a href="{% url 'user-profile-update' %}" class='btn btn-success'>EDIT PERMISSIONS (TO DO LATER)</a>
+                            </div>
+                            <hr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Name</th>
+                                <td>{{ worker.username }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Email</th>
+                                <td>{{ worker.email }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Phone</th>
+                                <td>{{ worker.profile.phone }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Address</th>
+                                <td>{{ worker.profile.address }}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Department</th>
+                                <td>NOT YET</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Position</th>
+                                <td>NOT YET</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-thumbnail" src="{{ worker.profile.image.url }}" alt="profile-image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

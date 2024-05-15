@@ -3,31 +3,30 @@
 {% block content %}
 <div class="row my-4 ">
     <div class='d-flex justify-content-between'>
-        <a href="{% url 'departments' %}" class='btn btn-primary'>To Departments</a>
 
-        <a href="{% url 'products-create' %}" class='btn btn-success'>New Product</a>
+    <a href="{% url 'products-products' %}" class='btn btn-primary'>To Products</a>
+
+    <a href="{% url 'departments-create' %}" class='btn btn-success'>New Department</a>
+    
     </div>
     <div class="col">
         <table class="table bg-white">
             <thead class="bg-info text-white">
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col">Capacity</th>
+                    <th scope="col">Available Space</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in items %}
                 <tr>
                     <td>{{ item.name }}</td>
-                    <td>{{ item.category }}</td>
-                    <td>{{ item.price }}</td>
-                    <td>{{ item.amount }}</td>
+                    <td>{{ item.capacity }}</td>
+                    <td>{{ item.available_space }}</td>
                     <td>
                         <div class='d-flex justify-content-end'>
-                            <a href="{% url 'products-update' item.id %}" class='btn btn-info text-white mx-2'>Edit</a>
-                            <a href="{% url 'products-delete' item.id %}" class='btn btn-danger text-white'>Delete</a>
+                            <a href="{% url 'departments-detail' item.id %}" class='btn btn-info text-white mx-2'>Info</a>
                         </div>
                     </td>
                 </tr>

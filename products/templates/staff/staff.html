@@ -1,0 +1,33 @@
+{% extends "partials/base.html" %}
+
+{% block content %}
+<div class="row my-4 ">
+    <div class="col">
+        <table class="table bg-white">
+            <thead class="bg-info text-white">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Position</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for worker in workers %}
+                <tr>
+                    <td>{{ worker.username }}</td>
+                    <td>{{ worker.email }}</td>
+                    <td>Not Yet</td>
+                    <td>Not Yet</td>
+                    <td>
+                        <div class='d-flex justify-content-end'>
+                            <a href="{% url 'products-staff-detail' worker.id %}" class='btn btn-info text-white mx-2'>View</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

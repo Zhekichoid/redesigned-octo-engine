@@ -2,11 +2,7 @@
 
 {% block content %}
 <div class="row my-4 ">
-    <div class='d-flex justify-content-between'>
-        <a href="{% url 'departments' %}" class='btn btn-primary'>To Departments</a>
-
-        <a href="{% url 'products-create' %}" class='btn btn-success'>New Product</a>
-    </div>
+    <h3>{{ department.name }}</h3>
     <div class="col">
         <table class="table bg-white">
             <thead class="bg-info text-white">
@@ -20,9 +16,9 @@
             <tbody>
                 {% for item in items %}
                 <tr>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.category }}</td>
-                    <td>{{ item.price }}</td>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.category }}</td>
+                    <td>{{ item.product.price }}</td>
                     <td>{{ item.amount }}</td>
                     <td>
                         <div class='d-flex justify-content-end'>
