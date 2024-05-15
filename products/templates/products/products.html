@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row my-4 ">
     <a href="{% url 'products-create' %}" class='btn btn-success'>New Product</a>
-    <div class="col-md-8">
+    <div class="col">
         <table class="table bg-white">
             <thead class="bg-info text-white">
                 <tr>
@@ -21,8 +21,10 @@
                     <td>{{ item.price }}</td>
                     <td>{{ item.amount }}</td>
                     <td>
-                        <a href="{% url 'products-update' item.product_id %}" class='btn btn-info text-white'>Edit</a>
-                        <a href="{% url 'products-delete' item.product_id %}" class='btn btn-danger text-white'>Delete</a>
+                        <div class='d-flex justify-content-end'>
+                            <a href="{% url 'products-update' item.product_id %}" class='btn btn-info text-white mx-2'>Edit</a>
+                            <a href="{% url 'products-delete' item.product_id %}" class='btn btn-danger text-white'>Delete</a>
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}
