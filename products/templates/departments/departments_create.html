@@ -1,0 +1,14 @@
+{% extends "partials/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="card card-body">
+    <h5>Create New Department</h5>
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="btn btn-success btn-block" type="submit" value="Create">
+    </form>
+</div>
+{% endblock content %}

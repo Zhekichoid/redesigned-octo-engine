@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .models import Products
-from .forms import ProductForm
+from .models import Products, Departments, ProductDepartment
+from .forms import ProductForm, DepartmentsForm
 from django.contrib.auth.models import User
 
 
@@ -12,30 +12,34 @@ from django.contrib.auth.models import User
 def index(request):
     return render(request,'products/index.html')
 
+
 @login_required
 def staff(request):
-    current_worker = request.user
-    workers = User.objects.exclude(id=current_worker.id)
+    current_items = request.user
+    itemss = User.objects.exclude(id=current_items.id)
 
     context = {
-        'workers' : workers
+        'itemss' : itemss
     }
 
-    return render(request,'products/staff.html', context)
+    return render(request,'staff/staff.html', context)
+
 
 @login_required
 def staff_detail(request, pk):
-    worker = User.objects.get(id=pk)
+    items = User.objects.get(id=pk)
 
     context = {
-        'worker': worker
+        'items': items
     }
 
-    return render(request, 'products/staff_detail.html', context)
+    return render(request, 'staff/staff_detail.html', context)
+
 
 @login_required
 def orders(request):
         return render(request,'products/orders.html')
+
 
 @login_required
 def products(request):
@@ -70,8 +74,10 @@ def product_delete(request, pk):
         return redirect('products-products')
     return render(request, 'products/product_delete.html')
 
+
 @login_required
 def product_update(request, pk):
+    
     item = Products.objects.get(product_id=pk)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=item)
@@ -86,3 +92,45 @@ def product_update(request, pk):
     }
 
     return render(request, 'products/product_update.html', context)
+
+
+
+#Departments
+@login_required
+def departments(request):
+    items = Departments.objects.all()
+
+    context = {
+        'items' : items
+    }
+
+    return render(request,'departments/departments.html', context)
+
+
+@login_required
+def department_create(request):
+    if request.method == 'POST':
+        form = DepartmentsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('departments')
+    else:
+        form = DepartmentsForm()
+
+    context = {
+        'form': form
+    }
+    return render(request,'departments/departments_create.html', context)
+
+
+@login_required
+def department_detail(request, pk):
+    department = Departments.objects.get(deparment_id=pk)
+    items = department.productdepartment_set.select_related('product')
+
+    context = {
+        'department' : department,
+        'items': items
+    }
+
+    return render(request, 'departments/departments_detail.html', context)
